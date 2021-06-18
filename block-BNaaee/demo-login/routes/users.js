@@ -12,6 +12,7 @@ router.get('/logout', (req, res, next) => {
   req.user = null;
   res.clearCookie('connect.sid');
   res.redirect('/');
+  //logout done
 });
 
 module.exports = router;
