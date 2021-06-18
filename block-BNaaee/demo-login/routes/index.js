@@ -14,10 +14,10 @@ router.get('/success', function (req, res, next) {
 
 /* Failure. */
 router.get('/failure', function (req, res, next) {
-  res.render('index');
+  res.render('failure');
 });
 
-//passport route
+//passport github route
 
 router.get('/auth/github', passport.authenticate('github'));
 
@@ -31,4 +31,21 @@ router.get(
     res.redirect('/success');
   }
 );
+
+//passport google route
+
+router.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile'] })
+);
+
+router.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/failure' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/success');
+  }
+);
+
 module.exports = router;

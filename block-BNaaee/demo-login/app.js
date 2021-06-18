@@ -22,6 +22,8 @@ mongoose.connect(
   }
 );
 
+require('./modules/passport');
+
 var app = express();
 
 // view engine setup
@@ -55,6 +57,7 @@ app.use(
 );
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
